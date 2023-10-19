@@ -1,0 +1,411 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Data";
+}
+
+<style>
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        background-color: royalblue;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    h1 {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+        text-decoration: underline;
+    }
+
+    .message {
+        display: flex;
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+    }
+
+    .user {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .content {
+        flex: 1;
+    }
+
+    .video-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 20px;
+    }
+    .custom-button.red{
+            background-color : #FF0000db;
+    }
+    .custom-button.yellow{
+            background-color: darkorange;
+    }
+    .custom-button.black{
+        background-color: #000000;
+    }
+
+    .custom-button.green {
+            background-color: forestgreen;
+     }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 20px;
+    }
+
+    /* Stil des Dropdown-Buttons */
+    .dropbtn {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Dropdown-Inhalt */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Optionen im Dropdown-Menü */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+            /* Ändere Hintergrundfarbe beim Hovern */
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    /* Zeige Dropdown-Inhalt beim Hovern über den Button */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .custom-textbox,
+    .custom-textarea {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #333;
+        transition: border-color 0.3s;
+    }
+
+    /* Stil für Textarea */
+    .custom-textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+        /* Ändere Rahmenfarbe beim Fokussieren */
+        .custom-textbox:focus,
+        .custom-textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+    #chatArea {
+        display: none;
+    }
+
+</style>
+
+
+<!--    
+<div class="video-container">
+    <h1 class="display-4">Welcome</h1>
+    <video width="600" height="600" controls>
+        <source src="example.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+  
+</div>
+ -->
+    <head>
+    <!--<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet">
+         <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
+    -->
+       
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+    
+    </head>
+
+<body>
+    <h1>SignalR Data Exchange</h1>
+
+    <h2>Remote</h2>
+            <div class="container">
+            <button id="startSimulation" class="custom-button green">Start</button>
+            <button id="pauseSimulation" class="custom-button red">Pause</button>
+
+            <button id="skipforwardsimulation" class="custom-button yellow">Forward</button>
+            <button id="resetsimulation" class="custom-button">Reset</button>
+        <button id="finalizevideo" class="custom-button" type="button">Finalize</button>
+
+            <div class="container">
+                <label for="command-Input">Command Auswahl:</label>
+                <select id="command-Input" name="Commands" class="dropdown">
+                    <option value="None">None</option>
+                    <option value="StartSimulation">StartSimulation</option>
+                    <option value="PauseSimulation">PauseSimulation</option>
+                    <option value="SkipForwardSimulation">SkipForwardSimulation</option>
+                    <option value="ResetSimulation">ResetSimulation</option>
+                    <option value="StartStream">StartStream</option>
+                    <option value="StopStream">StopStream</option>
+                </select>
+                <div class="container">
+                <button type="button" id="command-Button" class="custom-button">Send Command</button>
+                </div>
+               
+            </div>
+           </div>
+      
+    <div class="container">
+        <label for="simulationspeed">Geschwindigkeits Auswahl:</label>
+        <select id="simulationspeed" name="SimulationSpeed" class="dropdown">
+            <option value="0.50">0.50x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1.00" selected>1.0x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.50">1.50x</option>
+            <option value="1.75">1.75x</option>
+            <option value="2.00">2.00x</option>
+            <option value="3.00">3.00x</option>
+            <option value="4.00">4.00x</option>
+            <option value="5.00">5.00x</option>     
+        </select>
+        <div class="container">
+            <button id="simulationspeedbutton" class="custom-button">Send</button>
+        </div>
+    </div>
+    
+    <h2>Online</h2>
+
+    <div id="users-online" class="chat-area">
+        </div>
+
+            <video controls width="400" height="300">
+        <source src="http://remoteunit-2910.ddns.net/videos/video.mp4">
+            </video>
+    <video controls width="400" height="300">
+        <source src="http://remoteunit-2910.ddns.net/videos/video2.mp4">
+    </video>
+    <video controls width="400" height="300">
+        <source src="http://remoteunit-2910.ddns.net/convertedvideos/video2.mp4">
+    </video>
+    <video width="400" height="300" controls id="videoPlayer">
+        <source src="" type="http://remoteunit-2910.ddns.net/convertedvideos/video.mp4">
+        Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+    <!--
+         <video id="my-video" class="video-js" controls preload="auto">
+            <source src="/videos/myVideo.mp4" type="video/mp4">
+        </video>
+    -->
+   
+    
+
+     <div class="container">
+
+        <h2>Request JSON</h2>
+    
+
+
+        <div id="chatArea" class="chat-area">
+       
+        </div>
+
+       
+
+        <button type="button" id="vision" class="custom-button">Show</button>
+        <button type="button" id="clear" class="custom-button">Clean</button>
+
+
+
+        <h2>Input JSON</h2>
+        <label for="json">JSON:</label>
+        <input type="text" id="JSON-INPUT" class="custom-textbox" />
+        <button type="submit" id="Submit" class="custom-button">Submit</button>
+        </div>
+
+</body>
+
+
+<script>
+
+    const usersConnected = document.getElementById("users-online");
+    //var player = videojs('my-video');
+
+    // Verbindung zum SignalR-Hub
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/datahub") // Pfad zum Hub-Endpunkt
+        .build();
+
+    connection.on("ReceiveVCData", (json) => {
+        const jsonElement = document.getElementById("JSON-INPUT");
+        const chatArea = document.getElementById("chatArea");
+        const messageElement = document.createElement("div");
+
+        messageElement.textContent = `${json}`;
+        chatArea.appendChild(messageElement);
+    });
+    connection.on("ReceiveData", (json) => {
+        const jsonElement = document.getElementById("JSON-INPUT");
+        const chatArea = document.getElementById("chatArea");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.textContent = `${json}`;
+        chatArea.appendChild(messageElement);
+    });
+    connection.on("UpdateUserList", (users) => {
+
+        mylist = users; // Aktualisiere die lokale Liste mit der vom Server gesendeten Liste
+
+        const usersListDiv = document.getElementById("users-online");
+        usersListDiv.innerHTML = "";
+
+        for (let i = 0; i < mylist.length; i++) {
+            const userElement = document.createElement("div");
+            userElement.classList.add("message");
+            userElement.textContent = `User ${i + 1}: ${mylist[i]}`;
+            usersListDiv.appendChild(userElement);
+        }
+
+    });
+    
+    
+   
+
+
+    let i = 0;
+    var mylist = [];
+    var arraynumber = 0;
+
+
+    // Verbindung zum Hub starten
+    connection.start()
+        .then(() => {
+            console.log("SignalR connection started.");
+        })
+        .catch(err => {
+            console.error("Error starting SignalR connection:", err);
+        });
+
+
+
+
+    const showChatButton = document.getElementById("vision");
+    const chatArea = document.getElementById("chatArea");
+    showChatButton.addEventListener("click", () => {
+        chatArea.style.display = "block";
+    });
+
+
+    const cleanChatButton = document.getElementById("clear");
+    cleanChatButton.addEventListener("click", () => {
+        chatArea.innerHTML = "";
+
+        chatArea.style.display = "none";
+    });
+
+
+
+    const jsonInput = document.getElementById("JSON-INPUT");
+
+    document.getElementById("startSimulation").addEventListener("click", function () {
+        connection.invoke("StartSimulation").catch(err => console.error(err));
+    });
+    document.getElementById("pauseSimulation").addEventListener("click", function () {
+        connection.invoke("PauseSimulation").catch(err => console.error(err));
+    });
+    document.getElementById("skipforwardsimulation").addEventListener("click", function () {
+        connection.invoke("SkipForwardSimulation").catch(err => console.error(err));
+    });
+    document.getElementById("resetsimulation").addEventListener("click", function () {
+        connection.invoke("ResetSimulation").catch(err => console.error(err));
+    });
+    document.getElementById("finalizevideo").addEventListener("click", function () {
+        connection.invoke("FinalizeVideo").catch(err => console.error(err));
+    });
+
+
+    let currentspeedvalue = 1;
+    let currentcommand = "None";
+    const commandMenu = document.getElementById("command-Input");
+    commandMenu.addEventListener("change", function () {
+        currentcommand = commandMenu.value;
+    });
+    const commandButton = document.getElementById("command-Button");
+    commandButton.addEventListener("click", function () {
+        if (currentcommand != "None") {
+            connection.invoke(currentcommand).catch(err => console.error(err));
+        }
+
+
+    });
+    const speedMenu = document.getElementById("simulationspeed");
+    speedMenu.addEventListener("change", function () {
+        currentspeedvalue = parseFloat(speedMenu.value);
+    });
+
+    const speedButton = document.getElementById("simulationspeedbutton");
+    speedButton.addEventListener("click", function () {
+        connection.invoke("SimulationSpeed", currentspeedvalue).catch(err => console.error(err));
+    });
+
+    // Absende-Button-Event-Handler
+    const sendButton = document.getElementById("Submit");
+    sendButton.addEventListener("click", () => {
+        const json = document.getElementById("JSON-INPUT").value;
+        connection.invoke("SendMessage", json)
+            .catch(err => console.error("Error sending message:", err));
+
+    });
+</script>
+
+
+
+
+
+        
+
+
+
+
+    
+
+

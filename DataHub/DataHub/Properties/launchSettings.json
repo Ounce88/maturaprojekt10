@@ -1,0 +1,30 @@
+{
+  "profiles": {
+    "DataHub": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\inetpub\\wwwroot\\remoteunit\\wwwroot",
+      "launchBrowser": true,
+      "launchUrl": "http://remoteunit-2910.ddns.net/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://remoteunit-2910.ddns.net/"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:28766",
+      "sslPort": 44330
+    }
+  }
+}

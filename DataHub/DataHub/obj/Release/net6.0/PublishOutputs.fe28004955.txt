@@ -1,0 +1,8 @@
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\DataHub.exe
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\libman.json
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\DataHub.dll
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\DataHub.deps.json
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\DataHub.runtimeconfig.json
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Release\net6.0\PubTmp\Out\DataHub.pdb

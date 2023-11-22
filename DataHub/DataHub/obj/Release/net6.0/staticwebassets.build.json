@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hX4nG7nCc4pAYrXUCrhn0sgfW8mNl97KnsfzVhxhwCk=",
+  "Hash": "LK8UhFVycLAU/0zR+tCpLkb+85FeJ/04C6bubOh+kt8=",
   "Source": "DataHub",
   "BasePath": "_content/DataHub",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\backend.js"
+    },
+    {
+      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\js\\indexbackend.js",
+      "SourceId": "DataHub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
+      "BasePath": "_content/DataHub",
+      "RelativePath": "js/indexbackend.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\indexbackend.js"
     },
     {
       "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",

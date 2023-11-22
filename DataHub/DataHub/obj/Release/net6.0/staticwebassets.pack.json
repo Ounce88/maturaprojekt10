@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\js\\backend.js"
     },
     {
+      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\js\\indexbackend.js",
+      "PackagePath": "staticwebassets\\js\\indexbackend.js"
+    },
+    {
       "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",
       "PackagePath": "staticwebassets\\js\\signalr\\dist\\browser\\signalr.js"
     },

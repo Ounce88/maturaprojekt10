@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR;
+using NReco.VideoConverter;
 using System.Diagnostics;
+using Cascade10.Livestream;
+using Cascade.Database;
 
 namespace DataHub.Models
 {
@@ -11,6 +14,7 @@ namespace DataHub.Models
         private static Dictionary<string, List<byte[]>> VideoDataChunks = new Dictionary<string, List<byte[]>>();
         private readonly IWebHostEnvironment _webHostEnvironment;
         private int UserCount = 0;
+        private int markedcount = 0;
         public Datahub(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
@@ -55,6 +59,14 @@ namespace DataHub.Models
         {
             await Clients.All.SendAsync("ReceiveVCData", jsonData);
         }
+        public async Task LiveEditorContent(string content)
+        {            
+            await Clients.Others.SendAsync("ReceiveLiveEditorContent", content);
+        }
+        public async Task SubmitChanges(string jsonData)
+        {
+            await Clients.All.SendAsync("ReceiveChanges", jsonData);
+        }
         public async Task StartSimulation()
         {
             await Clients.All.SendAsync("StartSimulation");
@@ -98,8 +110,15 @@ namespace DataHub.Models
             
             await Clients.All.SendAsync("ReceiveStream");
         }
+
+        public async Task GetChunksAddQuery(byte[] chunk)
+        {
+            await Clients.All.SendAsync("GetChunksAddQuery", chunk);
+        }
+
         public async Task FinalizeVideo()
         {
+            /*
             string webpath = _webHostEnvironment.WebRootPath;
             var allChunks = VideoDataChunks[Context.ConnectionId];
 
@@ -107,12 +126,21 @@ namespace DataHub.Models
 
             string videoFileName = "video_temp.mp4"; // Temporärer Name der ursprünglichen Datei
             string videoPath = Path.Combine(webpath, "videos", videoFileName);
+            FFMpegConverter ffMpeg = new FFMpegConverter();
 
-            File.WriteAllBytes(videoPath, fullVideo);
-
-            // Hier beginnt die Konvertierung
+            // Setzen Sie die Konvertierungsoptionen
+            var settings = new ConvertSettings()
+            {
+                VideoCodec = "h264",  // Ziel-Codec ist H264
+            };
             string convertedFileName = "video.mp4";
             string convertedVideoPath = Path.Combine(webpath, "convertedvideos", convertedFileName);
+            
+            File.WriteAllBytes(videoPath, fullVideo);
+            ffMpeg.ConvertMedia("", convertedVideoPath, Format.mp4, settings);
+            
+            // Hier beginnt die Konvertierung
+            
 
             if (ConvertVideo(videoPath, convertedVideoPath))
             {
@@ -127,30 +155,41 @@ namespace DataHub.Models
 
             await PauseSimulation();
             VideoDataChunks.Remove(Context.ConnectionId);
+            */
+            string webpath = _webHostEnvironment.WebRootPath;
+            var allChunks = VideoDataChunks[Context.ConnectionId];
+
+            var fullVideo = allChunks.SelectMany(chunk => chunk).ToArray();
+
+            string videoFileName = "video12.mp4"; // Temporärer Name der ursprünglichen Datei
+            string videoPath = Path.Combine(webpath, "videos", videoFileName);
+
+            
+     
+            string convertedFileName = "video12.mp4";
+            string convertedVideoPath = Path.Combine(webpath, "convertedvideos", convertedFileName);
+
+            File.WriteAllBytes(videoPath, fullVideo);
+
+            // Hier beginnt die Konvertierung
+            //ConvertVideo(videoPath, convertedVideoPath);      
+            videoFileName = convertedFileName;
+            
+
+            await PauseSimulation();
+            VideoDataChunks.Remove(Context.ConnectionId);
         }
-        private bool ConvertVideo(string inputPath, string outputPath)
+        private void ConvertVideo(string inputPath, string outputPath)
         {
-            try
+            FFMpegConverter ffMpeg = new FFMpegConverter();
+            var settings = new ConvertSettings()
             {
-                var processStartInfo = new ProcessStartInfo
-                {
-                    FileName = "ffmpeg",
-                    Arguments = $"-i {inputPath} -c:v libx264 {outputPath}",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
+                VideoCodec = "h264",  // Ziel-Codec ist H264
+            };
 
-                using var process = new Process { StartInfo = processStartInfo };
-                process.Start();
-                process.WaitForExit();
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            
+            var videoInput = new FFMpegInput(inputPath);
+            ffMpeg.ConvertMedia(new[] { videoInput }, outputPath, "mp4", settings);
         }
 
       

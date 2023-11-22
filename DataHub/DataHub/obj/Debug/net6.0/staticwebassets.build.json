@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VGQP+3Jw4H9zaGk+WUegX7ANmCBqOeMjU/DaSbrq4GU=",
+  "Hash": "2OOtwBjzb0N+lVVCOiVj32s2ug2BmuhdkSuFGEwts9Y=",
   "Source": "DataHub",
   "BasePath": "_content/DataHub",
   "Mode": "Default",
@@ -1256,6 +1256,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\videos\\video.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video12.mp4",
+      "SourceId": "DataHub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
+      "BasePath": "_content/DataHub",
+      "RelativePath": "videos/video12.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\video12.mp4"
     },
     {
       "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video2.mp4",

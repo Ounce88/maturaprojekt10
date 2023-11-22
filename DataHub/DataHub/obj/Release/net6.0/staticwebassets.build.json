@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oqedZ/06OGiUFmkS65ZtBAl/dRca1dCbUqT3tJt6D8g=",
+  "Hash": "hX4nG7nCc4pAYrXUCrhn0sgfW8mNl97KnsfzVhxhwCk=",
   "Source": "DataHub",
   "BasePath": "_content/DataHub",
   "Mode": "Default",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\example.mp4",
-      "SourceId": "DataHub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
-      "BasePath": "_content/DataHub",
-      "RelativePath": "example.mp4",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\example.mp4"
     },
     {
       "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\favicon.ico",
@@ -1173,12 +1156,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\myVideo.mp4",
+      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\Models\\package.json",
       "SourceId": "DataHub",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
       "BasePath": "_content/DataHub",
-      "RelativePath": "myVideo.mp4",
+      "RelativePath": "Models/package.json",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1187,7 +1170,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\myVideo.mp4"
+      "OriginalItemSpec": "wwwroot\\Models\\package.json"
+    },
+    {
+      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\Models\\package-lock.json",
+      "SourceId": "DataHub",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
+      "BasePath": "_content/DataHub",
+      "RelativePath": "Models/package-lock.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Models\\package-lock.json"
     },
     {
       "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\myVideo.mp4",
@@ -1205,74 +1205,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\videos\\myVideo.mp4"
-    },
-    {
-      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video.mp4",
-      "SourceId": "DataHub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
-      "BasePath": "_content/DataHub",
-      "RelativePath": "videos/video.mp4",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\videos\\video.mp4"
-    },
-    {
-      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video_temp.h263",
-      "SourceId": "DataHub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
-      "BasePath": "_content/DataHub",
-      "RelativePath": "videos/video_temp.h263",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\videos\\video_temp.h263"
-    },
-    {
-      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video_temp.mp4",
-      "SourceId": "DataHub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
-      "BasePath": "_content/DataHub",
-      "RelativePath": "videos/video_temp.mp4",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\videos\\video_temp.mp4"
-    },
-    {
-      "Identity": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video2.mp4",
-      "SourceId": "DataHub",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\",
-      "BasePath": "_content/DataHub",
-      "RelativePath": "videos/video2.mp4",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\videos\\video2.mp4"
     }
   ]
 }

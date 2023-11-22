@@ -30,5 +30,5 @@ C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Debug\net6.0\refint\DataHub.
 C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Debug\net6.0\DataHub.pdb
 C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Debug\net6.0\DataHub.genruntimeconfig.cache
 C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Debug\net6.0\ref\DataHub.dll
-C:\Users\Alexander\source\repos\DataHub\DataHub\bin\Debug\net6.0\Models\package-lock.json
-C:\Users\Alexander\source\repos\DataHub\DataHub\bin\Debug\net6.0\Models\package.json
+C:\Users\Alexander\source\repos\DataHub\DataHub\bin\Debug\net6.0\NReco.VideoConverter.dll
+C:\Users\Alexander\source\repos\DataHub\DataHub\obj\Debug\net6.0\DataHub.csproj.CopyComplete

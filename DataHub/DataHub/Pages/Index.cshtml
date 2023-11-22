@@ -5,6 +5,16 @@
 }
 
 <style>
+    .ace_editor .ace_marker-layer .myMarker {
+        background: #ffeedd;
+        position: absolute;
+    }
+
+    .ace_active-line {
+        background: #e7e7e7; /* Eine helle Hintergrundfarbe für die Markierung */
+        position: absolute;
+    }
+    
     .custom-button {
         display: inline-block;
         padding: 10px 20px;
@@ -160,7 +170,8 @@
        
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
+
     </head>
 
 <body>
@@ -185,6 +196,7 @@
                     <option value="ResetSimulation">ResetSimulation</option>
                     <option value="StartStream">StartStream</option>
                     <option value="StopStream">StopStream</option>
+                    <option value="FinalizeVideo">FinalizeVideo</option>
                 </select>
                 <div class="container">
                 <button type="button" id="command-Button" class="custom-button">Send Command</button>
@@ -216,50 +228,50 @@
 
     <div id="users-online" class="chat-area">
         </div>
-
-            <video controls width="400" height="300">
+    <!--
+    <video controls width="400" height="300">
         <source src="http://remoteunit-2910.ddns.net/videos/video.mp4">
-            </video>
+    </video>
+
     <video controls width="400" height="300">
         <source src="http://remoteunit-2910.ddns.net/videos/video2.mp4">
     </video>
+
     <video controls width="400" height="300">
         <source src="http://remoteunit-2910.ddns.net/convertedvideos/video2.mp4">
     </video>
+
     <video width="400" height="300" controls id="videoPlayer">
         <source src="" type="http://remoteunit-2910.ddns.net/convertedvideos/video.mp4">
         Dein Browser unterstützt das Video-Tag nicht.
     </video>
-    <!--
+    
          <video id="my-video" class="video-js" controls preload="auto">
             <source src="/videos/myVideo.mp4" type="video/mp4">
         </video>
+    <video controls width="400" height="300" autoplay></video>
     -->
-   
+    <div>
+        <h1>JSON Editor</h1>
+
+
+
+        <div id="jsonInput" style="height: 200px; width: 500px;"></div>
+
+        <!--
+            <textarea id="jsonInput" cols="50" rows="15"></textarea>
+        <br>
+
+        <div id="jsonOutput"></div>
+        -->
+        
+        <button id="submitButton1"type="submit" class="custom-button" >Submit</button>
+    </div>
+
+    
     
 
-     <div class="container">
-
-        <h2>Request JSON</h2>
-    
-
-
-        <div id="chatArea" class="chat-area">
-       
-        </div>
-
-       
-
-        <button type="button" id="vision" class="custom-button">Show</button>
-        <button type="button" id="clear" class="custom-button">Clean</button>
-
-
-
-        <h2>Input JSON</h2>
-        <label for="json">JSON:</label>
-        <input type="text" id="JSON-INPUT" class="custom-textbox" />
-        <button type="submit" id="Submit" class="custom-button">Submit</button>
-        </div>
+     
 
 </body>
 
@@ -275,14 +287,60 @@
         .withUrl("/datahub") // Pfad zum Hub-Endpunkt
         .build();
 
+    let editor = ace.edit("jsonInput");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/json");
+    let isUpdateFromServer = false;
+
+
+    editor.session.on("change", () => {
+
+        if (!isUpdateFromServer) {
+            const content = editor.getValue();
+            connection.invoke("LiveEditorContent", content)
+                .catch(err => console.error(err.toString()));
+        }
+
+    });
+
+
+    connection.on("ReceiveLiveEditorContent", (content) => {
+        const currentPosition = editor.getCursorPosition();
+
+        isUpdateFromServer = true;
+        editor.session.setValue(content);
+
+        editor.moveCursorToPosition(currentPosition);
+        editor.clearSelection();
+
+        isUpdateFromServer = false;
+    });
+
     connection.on("ReceiveVCData", (json) => {
+        /*
+
         const jsonElement = document.getElementById("JSON-INPUT");
         const chatArea = document.getElementById("chatArea");
         const messageElement = document.createElement("div");
 
         messageElement.textContent = `${json}`;
         chatArea.appendChild(messageElement);
+        
+        */
+
+        var json2 = JSON.stringify(json, null, 2);
+
+        if(json2 != oldjson){
+            
+            editor.setValue(json2);
+            formatJsonInEditor();
+            const oldjson = json2;
+        }
+
+        
+        
     });
+    /*
     connection.on("ReceiveData", (json) => {
         const jsonElement = document.getElementById("JSON-INPUT");
         const chatArea = document.getElementById("chatArea");
@@ -291,11 +349,14 @@
         messageElement.textContent = `${json}`;
         chatArea.appendChild(messageElement);
     });
+    */
     connection.on("UpdateUserList", (users) => {
 
-        mylist = users; // Aktualisiere die lokale Liste mit der vom Server gesendeten Liste
+        mylist = users;
 
         const usersListDiv = document.getElementById("users-online");
+        const currentPosition = editor.getCursorPosition();
+
         usersListDiv.innerHTML = "";
 
         for (let i = 0; i < mylist.length; i++) {
@@ -305,7 +366,48 @@
             usersListDiv.appendChild(userElement);
         }
 
+        
+        const content = editor.getValue();
+
+        //Schreibt nur Werte vom Befüllten Editor rein
+        if(content != ""){
+
+            connection.invoke("LiveEditorContent", content)
+                .catch(err => console.error(err.toString()));
+            editor.moveCursorToPosition(currentPosition);
+            editor.clearSelection();
+            
+        }
+            
+        
+           
+        
     });
+    connection.on("GetChunksAddQuery", (chunk) => {
+        appendChunk(chunk);
+    });
+    /*
+    var video = document.querySelector('video');
+    var mediaSource = new MediaSource();
+    video.src = URL.createObjectURL(mediaSource);
+
+    // Globaler SourceBuffer
+    var sourceBuffer;
+
+    mediaSource.addEventListener('sourceopen', function () {
+        // Erstellen Sie hier den SourceBuffer mit dem korrekten MIME-Type
+        sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E"');
+
+        // Listener für das Hinzufügen weiterer Chunks
+        
+    });
+
+    function appendChunk(chunk) {
+        if (mediaSource.readyState === 'open') {
+            sourceBuffer.appendBuffer(chunk);
+        } 
+    }
+    */
     
     
    
@@ -328,19 +430,7 @@
 
 
 
-    const showChatButton = document.getElementById("vision");
-    const chatArea = document.getElementById("chatArea");
-    showChatButton.addEventListener("click", () => {
-        chatArea.style.display = "block";
-    });
-
-
-    const cleanChatButton = document.getElementById("clear");
-    cleanChatButton.addEventListener("click", () => {
-        chatArea.innerHTML = "";
-
-        chatArea.style.display = "none";
-    });
+   
 
 
 
@@ -387,14 +477,18 @@
         connection.invoke("SimulationSpeed", currentspeedvalue).catch(err => console.error(err));
     });
 
-    // Absende-Button-Event-Handler
-    const sendButton = document.getElementById("Submit");
-    sendButton.addEventListener("click", () => {
-        const json = document.getElementById("JSON-INPUT").value;
-        connection.invoke("SendMessage", json)
-            .catch(err => console.error("Error sending message:", err));
+    const submitButton = document.getElementById("submitButton1");
+    submitButton.addEventListener("click", () => {
+        const json = editor.getValue();
+        
+    connection.invoke("SubmitChanges", json)
+      .catch(err => console.error("Error sending message:", err));
 
     });
+
+    
+
+    
 </script>
 
 

@@ -5,16 +5,20 @@
       "PackagePath": "staticwebassets\\DataHub.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\Models\\package-lock.json",
+      "PackagePath": "staticwebassets\\Models\\package-lock.json"
+    },
+    {
+      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\Models\\package.json",
+      "PackagePath": "staticwebassets\\Models\\package.json"
+    },
+    {
       "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\css\\styles.css",
       "PackagePath": "staticwebassets\\css\\styles.css"
-    },
-    {
-      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\example.mp4",
-      "PackagePath": "staticwebassets\\example.mp4"
     },
     {
       "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\favicon.ico",
@@ -269,28 +273,8 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\myVideo.mp4",
-      "PackagePath": "staticwebassets\\myVideo.mp4"
-    },
-    {
       "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\myVideo.mp4",
       "PackagePath": "staticwebassets\\videos\\myVideo.mp4"
-    },
-    {
-      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video.mp4",
-      "PackagePath": "staticwebassets\\videos\\video.mp4"
-    },
-    {
-      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video2.mp4",
-      "PackagePath": "staticwebassets\\videos\\video2.mp4"
-    },
-    {
-      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video_temp.h263",
-      "PackagePath": "staticwebassets\\videos\\video_temp.h263"
-    },
-    {
-      "Id": "C:\\Users\\Alexander\\source\\repos\\DataHub\\DataHub\\wwwroot\\videos\\video_temp.mp4",
-      "PackagePath": "staticwebassets\\videos\\video_temp.mp4"
     },
     {
       "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.DataHub.Microsoft.AspNetCore.StaticWebAssets.props",
